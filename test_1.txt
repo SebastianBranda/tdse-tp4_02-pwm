@@ -1,0 +1,12 @@
+Al ejecutar la funcion test1_tick() se ha observado a traves del osciloscopio una señal cuadrada de una frecuencia de 1KHz (periodo de 1ms) y una amplitud de 3,36V.
+A su vez, esta señal tiene una variación en el ciclo de trabajo, de 0% a 100% y luego nuevamente a 0%. Se observa que la variación del ciclo de trabajo es constante.
+Esto se ve en el codigo al establecer una variable llamada 'step' la cual se suma o resta al periodo activo del pwm.
+Luego se ha observado que la intensidad del LED varia con el tiempo, con un periodo aproximado entre 5 y 6 segundos, este tiempo considera el LED apagado, luego encendido y finalmente apagado.
+Se ha observado que el SYSCLK es de 64MHz, y se ha establecido una variable estatica: period=65535
+Con ello podria determinarse que la frecuencia de la señal cuadrada es de aproximadamente 977Hz.
+Luego se ha observado que la variable estatica: step=100, que cada paso aumenta (o disminuye) la variable que funciona como contador 'active'.
+Asimismo se ha observado que el pwm se actualiza cada 4 ticks, por tanto:
+(65535/100) = 655 llamadas a la funcion para completar un ciclo
+977Hz/4 = 244.25Hz frecuencia de actualizacion del pwn
+Por tanto:
+655/244.25Hz = 2.68 segundos para ir de 0% a 100% de ciclo de trabajo.
